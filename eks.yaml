@@ -4,5 +4,5 @@ Resources:
     Type: AWS::EKS::Cluster
     Properties:
       Name: my-eks-cluster
-      RoleArn: <ARN-of-Role-with-EKS-Permissions>
-      Version: "1.18"
+      RoleArn: AWSEKSRole
+      Version: "1.25"
