@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Verify CloudFormation Template') {
             steps {
-                sh 'aws cloudformation validate-template --template-body file://cloudformation/eks-cluster.yaml'
+                sh 'aws cloudformation validate-template --template-body file://cloudformation/eks.yaml'
             }
         }
         stage('Create EKS Cluster') {
