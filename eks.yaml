@@ -6,3 +6,9 @@ Resources:
       Name: my-eks-cluster
       RoleArn: AWSEKSRole
       Version: "1.25"
+      ResourcesVpcConfig:
+        SecurityGroupIds:
+          - sg-0d9889bfba2f2af06
+        SubnetIds:
+          - subnet-01b356a04735bdf93
+          - subnet-02292fdcaa54aebe
