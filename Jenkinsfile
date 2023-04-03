@@ -9,7 +9,7 @@ pipeline {
         stage('Create EKS Cluster') {
             steps {
                 sh 'aws cloudformation create-stack --stack-name ronyEKS --template-body file://eks.yaml'
-                sh 'aws cloudformation wait stack-create-complete --stack-name ronyEKS
+                sh 'aws cloudformation wait stack-create-complete --stack-name ronyEKS'
             }
         }
         stage('Configure kubectl') {
