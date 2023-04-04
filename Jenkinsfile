@@ -12,15 +12,5 @@ pipeline {
                 sh 'aws cloudformation wait stack-create-complete --stack-name ronyEKS'
             }
         }
-        stage('Configure kubectl') {
-            steps {
-                sh 'aws eks update-kubeconfig --name my-eks-cluster'
-            }
-        }
-        stage('Deploy Kubernetes Manifests') {
-            steps {
-                sh 'kubectl apply -f kubernetes-manifests'
-            }
-        }
     }
 }
