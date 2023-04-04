@@ -4,7 +4,7 @@ Resources:
     Type: AWS::EKS::Cluster
     Properties:
       Name: ronyEKS
-      RoleArn: AWSEKSRole
+      RoleArn: "arn:aws:iam::388328004932:role/AWSEKSRole"
       Version: "1.25"
       ResourcesVpcConfig:
         SecurityGroupIds:
