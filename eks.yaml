@@ -1,13 +1,14 @@
-  Resources:
-    EKSCluster:
-        Type: AWS::EKS::Cluster
-        Properties:
-            Name: test
-            Version: "1.25"
-            RoleArn: "arn:aws:iam::388328004932:role/AWSEKSRole"
-            ResourcesVpcConfig:
-                SecurityGroupIds:
-                - sg-0d8315f2e7a43714e
-                SubnetIds:
-                - subnet-0a31af885cfd8721d
-                - subnet-01b356a04735bdf93 
+---
+Resources:
+  Cluster:
+    Type: AWS::EKS::Cluster
+    Properties:
+      Name: ronyEKS
+      RoleArn: "arn:aws:iam::388328004932:role/AWSEKSRole"
+      Version: "1.25"
+      ResourcesVpcConfig:
+        SecurityGroupIds:
+          - sg-0d9889bfba2f2af06
+        SubnetIds:
+          - subnet-0a31af885cfd8721d
+          - subnet-01b356a04735bdf93 
