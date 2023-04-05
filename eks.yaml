@@ -18,6 +18,7 @@ Resources:
        ClusterName: ronyEKS
        NodegroupName: ronyNodegroup
        NodeRole: "arn:aws:iam::388328004932:role/eks-node-group"
+       LaunchTemplate: RonyLaunch
        ScalingConfig:
          MinSize: 1
          DesiredSize: 2
@@ -25,4 +26,5 @@ Resources:
        Subnets:
          - subnet-0a31af885cfd8721d
          - subnet-01b356a04735bdf93 
+         
       
