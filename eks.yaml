@@ -18,7 +18,8 @@ Resources:
       ClusterName: ronyEKS
       NodegroupName: ronyNodegroup
       NodeRole: arn:aws:iam::388328004932:role/eks-node-group
-      Name: "RonyLaunch"
+      LaunchTemplate:
+        Name: "RonyLaunch"
       ScalingConfig:
         MinSize: 1
         DesiredSize: 2
