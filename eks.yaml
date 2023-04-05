@@ -2,7 +2,7 @@
     EKSCluster:
         Type: AWS::EKS::Cluster
         Properties:
-            Name: davidCluster24
+            Name: test
             Version: "1.25"
             RoleArn: "arn:aws:iam::388328004932:role/AWSEKSRole"
             ResourcesVpcConfig:
