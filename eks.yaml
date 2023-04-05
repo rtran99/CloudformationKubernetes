@@ -25,6 +25,3 @@ Resources:
         MinSize: 1
         DesiredSize: 2
         MaxSize: 3
-      Subnets:
-        - subnet-0a31af885cfd8721d
-        - subnet-01b356a04735bdf93
