@@ -12,3 +12,17 @@ Resources:
         SubnetIds:
           - subnet-0a31af885cfd8721d
           - subnet-01b356a04735bdf93 
+   Nodegroup:       
+     Type: AWS::EKS::Nodegroup
+     Properties: 
+       ClusterName: ronyEKS
+       NodegroupName: ronyNodegroup
+       NodeRole: "arn:aws:iam::388328004932:role/eks-node-group"
+       ScalingConfig:
+         MinSize: 1
+         DesiredSize: 2
+         MaxSize: 3
+       Subnets:
+         - subnet-0a31af885cfd8721d
+         - subnet-01b356a04735bdf93 
+      
