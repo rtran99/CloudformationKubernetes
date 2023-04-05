@@ -14,6 +14,7 @@ Resources:
           - subnet-01b356a04735bdf93
     Nodegroup:
       Type: AWS::EKS::Nodegroup
+      DependsOn: Cluster
       Properties:
         ClusterName: ronyEKS
         NodegroupName: ronyNodegroup
