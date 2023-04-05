@@ -12,14 +12,14 @@ Resources:
         SubnetIds:
           - subnet-0a31af885cfd8721d
           - subnet-01b356a04735bdf93
-    WaitHandle:
-      Type: AWS::CloudFormation::WaitConditionHandle
-    WaitCondition:
-      Type: AWS::CloudFormation::WaitCondition
-      DependsOn: Cluster
-      Properties:
-        Handle: !Ref 'WaitHandle'
-        Timeout: '300'
+WaitHandle:
+  Type: AWS::CloudFormation::WaitConditionHandle
+WaitCondition:
+  Type: AWS::CloudFormation::WaitCondition
+   DependsOn: Cluster
+   Properties:
+     Handle: !Ref 'WaitHandle'
+     Timeout: '300'
     Nodegroup:
       Type: AWS::EKS::Nodegroup
       Properties:
