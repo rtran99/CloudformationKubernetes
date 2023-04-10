@@ -1,27 +1,61 @@
 ---
+
 Resources:
-  Cluster:
-    Type: AWS::EKS::Cluster
-    Properties:
-      Name: ronyEKS
-      RoleArn: arn:aws:iam::388328004932:role/AWSEKSRole
-      Version: "1.25"
-      ResourcesVpcConfig:
-        SecurityGroupIds:
-          - sg-0d8315f2e7a43714e
-        SubnetIds:
-          - subnet-0a31af885cfd8721d
-          - subnet-01b356a04735bdf93
-  Nodegroup:
-    Type: AWS::EKS::Nodegroup
-    DependsOn: Cluster
-    Properties:
-      ClusterName: ronyEKS
-      NodegroupName: ronyNodegroup
-      NodeRole: arn:aws:iam::388328004932:role/EKS_Cluster_Node1
-      LaunchTemplate:
-        Name: RonyLaunch
-      ScalingConfig:
-        MinSize: 1
-        DesiredSize: 2
-        MaxSize: 3
+
+  Cluster:
+
+    Type: AWS::EKS::Cluster
+
+    Properties:
+
+      Name: ronyEKS
+
+      RoleArn: arn:aws:iam::388328004932:role/AWSEKSRole
+
+      Version: "1.25"
+
+      ResourcesVpcConfig:
+
+        SecurityGroupIds:
+
+          - sg-06b9c2f393d81edfb
+
+        SubnetIds:
+
+          - subnet-0d43564d38acc22e5
+
+          - subnet-0b7a5cbdc6acb38dc
+
+  Nodegroup:
+
+    Type: AWS::EKS::Nodegroup
+
+    DependsOn: Cluster
+
+    Properties:
+
+      ClusterName: ronyEKS
+
+      NodegroupName: ronyNodegroup
+
+      InstanceTypes:
+
+        - t2.micro
+
+      DiskSize: 8
+
+      NodeRole: arn:aws:iam::388328004932:role/eks-node-group
+
+      ScalingConfig:
+
+        MinSize: 2
+
+        DesiredSize: 3
+
+        MaxSize: 4
+
+      Subnets:
+
+        - subnet-0d43564d38acc22e5
+
+        - subnet-0b7a5cbdc6acb38dc
