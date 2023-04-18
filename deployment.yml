@@ -17,4 +17,4 @@ spec:
         - name: back-end
           image: http://388328004932.dkr.ecr.us-east-1.amazonaws.com/noderepo:latest
           ports:
-            - containerPort: 80
+            - containerPort: 3000
