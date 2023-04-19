@@ -18,7 +18,8 @@ pipeline {
         stage('Deploy Application') {
             steps {
                 sh 'aws eks --region us-east-1 update-kubeconfig --name ronyEKS'
-                sh 'kubectl apply -f deployment.yml -f service.yml'
+                sh 'kubectl apply -f deployment.yml'
+                sh 'kubectl apply -f service.yml'
             }
         }
     }
