@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: back-end
-          image: 388328004932.dkr.ecr.us-east-1.amazonaws.com/eshani-eks-webapp:latest
+          image: 388328004932.dkr.ecr.us-east-1.amazonaws.com/noderepo
           ports:
             - containerPort: 3000
