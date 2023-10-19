@@ -1,20 +1,12 @@
-	EcsPullEventEntity getEcsPullEvent(String topicEventId, boolean standardMode) throws InterruptedException {
-
-		log.info("Waiting until event is consumed in ECS_PULL_EVENT table");
-		int i = 0;
-		List<EcsPullEventEntity> records = null;
-		try {
-			do {
-				if(!standardMode)
-					records = fileMsngrRepoValidation.findByTopicEventId(topicEventId);
-				else
-					records = fileMsngrRepoStandard.findByTopicEventId(topicEventId);
-				i++;
-			}while(records.isEmpty() && i < (EVENT_WAIT_TIME_IN_SEC * EVENT_WAIT_TIME_IN_MIN));
-		}catch(Exception e) {
-			log.error("Exception occurred while fetching records from ECS_PULL_EVENT : {}",e.getMessage(),e);
-		}
-		log.info("{} event is consumed in ECS_PULL_EVENT table",records.size());
-		return records.get(0);
-	}
- 
+    public List<EcsPullEventEntity> findByTopicEventId(String topicEventId) throws InterruptedException {
+        TimeUnit.MILLISECONDS.sleep(1000);
+        return execute(entityManager -> {
+            try {
+                TypedQuery<EcsPullEventEntity> query = entityManager.createNamedQuery("EcsPullEventEntity.findByTopicEvntId", EcsPullEventEntity.class);
+                query.setParameter("topicEventId", topicEventId);
+                return query.getResultList();
+            } finally {
+                entityManager.close();
+            }
+        });
+    }
