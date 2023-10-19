@@ -1,62 +1,20 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: backend-service
-spec:
-  type: NodePort
-  selector:
-    app: web
-  ports:
-    - nodePort: 31479
-      port: 8080
-      targetPort: 3000
-      
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Random;
+	EcsPullEventEntity getEcsPullEvent(String topicEventId, boolean standardMode) throws InterruptedException {
 
-public class BulkFileCreator {
-
-    public static void main(String[] args) {
-        String bulkType = "AR"; // Replace with your desired bulk type
-        String fileName = generateFileName(bulkType);
-        String content = "This is the content of the file.";
-
-        try {
-            createBulkFile(fileName, content);
-            System.out.println("File created: " + fileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static String generateFileName(String bulkType) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd.HHmmss");
-        String timestamp = dateFormat.format(new Date());
-
-        Random random = new Random();
-        int randomNumberE = random.nextInt(100000); // Generates a random number for E
-        int randomNumberD = random.nextInt(100000); // Generates a random number for D
-
-        String fileName = "ITF." + bulkType + ".B.E" + randomNumberE + ".D" + timestamp + ".T" + timestamp + ".A001";
-        return fileName;
-    }
-
-    public static void createBulkFile(String fileName, String content) throws IOException {
-        String resourcesPath = "src/main/resources/bulkFiles/";
-        Path filePath = Path.of(resourcesPath, fileName);
-
-        File directory = new File(resourcesPath);
-        if (!directory.exists()) {
-            directory.mkdirs(); // Create the directory if it doesn't exist
-        }
-
-        Files.write(filePath, content.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
-    }
-}
-
+		log.info("Waiting until event is consumed in ECS_PULL_EVENT table");
+		int i = 0;
+		List<EcsPullEventEntity> records = null;
+		try {
+			do {
+				if(!standardMode)
+					records = fileMsngrRepoValidation.findByTopicEventId(topicEventId);
+				else
+					records = fileMsngrRepoStandard.findByTopicEventId(topicEventId);
+				i++;
+			}while(records.isEmpty() && i < (EVENT_WAIT_TIME_IN_SEC * EVENT_WAIT_TIME_IN_MIN));
+		}catch(Exception e) {
+			log.error("Exception occurred while fetching records from ECS_PULL_EVENT : {}",e.getMessage(),e);
+		}
+		log.info("{} event is consumed in ECS_PULL_EVENT table",records.size());
+		return records.get(0);
+	}
+ 
