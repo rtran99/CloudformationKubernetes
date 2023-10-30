@@ -1,12 +1,1 @@
-    public List<EcsPullEventEntity> findByTopicEventId(String topicEventId) throws InterruptedException {
-        TimeUnit.MILLISECONDS.sleep(1000);
-        return execute(entityManager -> {
-            try {
-                TypedQuery<EcsPullEventEntity> query = entityManager.createNamedQuery("EcsPullEventEntity.findByTopicEvntId", EcsPullEventEntity.class);
-                query.setParameter("topicEventId", topicEventId);
-                return query.getResultList();
-            } finally {
-                entityManager.close();
-            }
-        });
-    }
+
